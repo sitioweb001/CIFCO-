@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate El Espino | Análisis Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Outfit (Moderna) y Playfair Display (Elegante) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        svBlue: { 400: '#3b82f6', 500: '#0047AB', 900: '#0a192f' },
+                        svGold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' },
+                        svGreen: { 400: '#34d399', 500: '#10b981', 900: '#064e3b' }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards'
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos base oscuros */
+        body {
+            background-color: #050b14;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Utilidad para el vidrio esmerilado PRO (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-nav {
+            background: rgba(5, 11, 20, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Transiciones de secciones */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilos de botones del menú */
+        .nav-btn {
+            position: relative;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3b82f6; /* Azul brillante */
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #3b82f6;
+        }
+        .nav-btn.active {
+            color: #ffffff;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        .nav-btn.active::after {
+            width: 80%;
+        }
+
+        .nav-btn-gold.active::after {
+            background: #fbbf24;
+            box-shadow: 0 0 10px #fbbf24;
+        }
+
+        /* Scrollbar estilizada */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        /* Torogoz Watermark Background */
+        .bg-watermark {
+            position: fixed;
+            top: 20%;
+            right: -5%;
+            width: 60vw;
+            height: 60vw;
+            opacity: 0.02;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-svBlue-500 selection:text-white">
+
+    <!-- FONDOS ANIMADOS DIFUMINADOS (Orbes de luz detrás del vidrio) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- Orbe Azul (Bandera) -->
+        <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-svBlue-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+        <!-- Orbe Verde (Naturaleza/El Espino) -->
+        <div class="absolute bottom-[-10%] right-[-10%] w-[35rem] h-[35rem] bg-svGreen-500/15 rounded-full mix-blend-screen filter blur-[120px] animate-blob" style="animation-delay: 2s;"></div>
+        <!-- Orbe Dorado (Detalles) -->
+        <div class="absolute top-[40%] left-[50%] w-[25rem] h-[25rem] bg-svGold-500/10 rounded-full mix-blend-screen filter blur-[90px] animate-blob" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- WATERMARK TOROGOZ -->
+    <svg viewBox="0 0 200 200" class="bg-watermark text-white fill-current">
+        <path d="M 80,70 Q 110,60 120,85 Q 110,120 90,140 Q 80,110 80,70" />
+        <path d="M 80,70 Q 75,50 95,50 Q 110,50 110,70 Z" />
+        <path d="M 115,80 Q 135,100 120,135 Q 110,110 115,80" />
+        <path d="M 90,140 L 92,175" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M 95,140 L 98,180" fill="none" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="92" cy="180" rx="5" ry="8"/>
+        <ellipse cx="98" cy="185" rx="5" ry="8"/>
+    </svg>
+
+    <!-- NAVEGACIÓN SUPERIOR (GLASSMORPHISM) -->
+    <nav class="glass-nav fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- LOGO SVG TRANSPARENTE -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <!-- Aquí se carga tu logo.svg. El fondo es bg-transparent. 
+                         El onerror es un respaldo seguro por si la imagen local no existe aún. -->
+                    <img src="logo.svg" alt="Logo" class="h-12 w-auto object-contain bg-transparent drop-shadow-xl" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'none\' stroke=\'%233b82f6\' stroke-width=\'4\'><circle cx=\'50\' cy=\'50\' r=\'40\'/><path d=\'M25 75L50 25L75 75\' stroke=\'%23fbbf24\'/><circle cx=\'50\' cy=\'50\' r=\'5\' fill=\'%23fff\'/></svg>'">
+                    <span class="font-serif text-xl font-bold tracking-wider text-white hidden sm:block bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+                        DEBATE SV
+                    </span>
+                </div>
+
+                <!-- MENÚS (ESCRITORIO) -->
+                <div class="hidden md:flex space-x-1 lg:space-x-4">
+                    <button onclick="switchSection('inicio')" id="btn-inicio" class="nav-btn active px-3 py-2 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-compass"></i> Inicio
+                    </button>
+                    <button onclick="switchSection('desarrollo')" id="btn-desarrollo" class="nav-btn px-3 py-2 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-city"></i> Desarrollo
+                    </button>
+                    <button onclick="switchSection('politica')" id="btn-politica" class="nav-btn px-3 py-2 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Política
+                    </button>
+                    <button onclick="switchSection('ecosistema')" id="btn-ecosistema" class="nav-btn px-3 py-2 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-leaf"></i> Ecosistema
+                    </button>
+                    <button onclick="switchSection('peticion')" id="btn-peticion" class="nav-btn nav-btn-gold px-4 py-2 text-sm flex items-center gap-2 text-svGold-400 hover:text-svGold-300">
+                        <i class="fa-solid fa-signature"></i> Firmar
+                    </button>
+                </div>
+
+                <!-- MENÚ MÓVIL SCROLL -->
+                <div class="md:hidden flex overflow-x-auto w-full ml-4 pb-2 scrollbar-none space-x-4 items-center">
+                    <button onclick="switchSection('inicio')" id="btn-inicio-mob" class="nav-btn active whitespace-nowrap text-sm"><i class="fa-solid fa-compass"></i></button>
+                    <button onclick="switchSection('desarrollo')" id="btn-desarrollo-mob" class="nav-btn whitespace-nowrap text-sm"><i class="fa-solid fa-city"></i></button>
+                    <button onclick="switchSection('politica')" id="btn-politica-mob" class="nav-btn whitespace-nowrap text-sm"><i class="fa-solid fa-scale-balanced"></i></button>
+                    <button onclick="switchSection('ecosistema')" id="btn-ecosistema-mob" class="nav-btn whitespace-nowrap text-sm"><i class="fa-solid fa-leaf"></i></button>
+                    <button onclick="switchSection('peticion')" id="btn-peticion-mob" class="nav-btn nav-btn-gold text-svGold-400 whitespace-nowrap text-sm"><i class="fa-solid fa-signature"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 min-h-screen flex flex-col justify-center">
+        
+        <!-- HEADER TEXT -->
+        <div class="text-center mb-12 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-svGold-400 text-xs tracking-widest uppercase mb-6 backdrop-blur-md">
+                <i class="fa-solid fa-feather-pointed"></i> Análisis Ambiental
+            </div>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4 tracking-tight leading-tight">
+                El Debate de <span class="text-transparent bg-clip-text bg-gradient-to-r from-svGreen-400 to-svBlue-400">El Espino</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light">
+                Más allá del ecocidio o el conformismo: Una perspectiva integral sobre el desarrollo y la conservación.
+            </p>
+        </div>
+
+        <!-- CONTENEDOR DE VIDRIO (GLASS PANEL) -->
+        <div class="glass-panel rounded-[2rem] p-6 md:p-12 relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+            
+            <!-- Detalles de luz internos del panel -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-svBlue-500/50 to-transparent"></div>
+            
+            <!-- SECTION 1: INICIO -->
+            <div id="sec-inicio" class="content-section active space-y-8">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-svBlue-500/20 flex items-center justify-center border border-svBlue-500/30 text-svBlue-400">
+                        <i class="fa-solid fa-layer-group text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">La Realidad Compleja</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-5 text-slate-300 font-light leading-relaxed">
+                        <p>
+                            El debate sobre El Espino no debería reducirse a <span class="text-white font-medium">“todo está bien”</span> o <span class="text-svGold-400 font-medium">“todo es un ecocidio”</span>. La realidad es más compleja.
+                        </p>
+                        <p>
+                            Durante décadas, antes incluso de 2019, muchos gobiernos en El Salvador permitieron urbanización desordenada, tala, contaminación y abandono ambiental. Mientras el país atravesaba distintas etapas económicas y políticas desde los años 70, casi nunca se vio una presión social fuerte por proteger los bosques.
+                        </p>
+                        <p>
+                            El deterioro ambiental y el aumento del calor no comenzaron hoy; son <span class="text-svBlue-300 font-medium border-b border-svBlue-500/30 pb-0.5">consecuencias acumuladas de décadas</span> de crecimiento urbano, contaminación y poca planificación.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-white/5 relative overflow-hidden group">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-svBlue-500/10 rounded-full blur-xl group-hover:bg-svBlue-500/20 transition-all duration-500"></div>
+                        <h3 class="text-white font-serif text-xl mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-svBlue-400"></i> Contexto Histórico
+                        </h3>
+                        <ul class="space-y-4 text-sm text-slate-400">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-arrow-right text-svGold-500/70 mt-1"></i>
+                                <span>Crecimiento urbano desmedido desde los 70s.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-arrow-right text-svGold-500/70 mt-1"></i>
+                                <span>Falta histórica de políticas de estado para zonas de recarga.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-arrow-right text-svGold-500/70 mt-1"></i>
+                                <span>El calor actual es una suma de factores climáticos globales y deforestación local.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: DESARROLLO -->
+            <div id="sec-desarrollo" class="content-section space-y-8">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-slate-500/20 flex items-center justify-center border border-slate-500/30 text-slate-300">
+                        <i class="fa-solid fa-building text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Desarrollo vs. Naturaleza</h2>
+                </div>
+
+                <div class="space-y-6 text-slate-300 font-light leading-relaxed text-lg">
+                    <p>
+                        Hoy El Salvador busca avanzar económica, comercial y políticamente. Un país pequeño necesita infraestructura moderna, turismo, inversión y proyectos que le permitan competir regionalmente. <strong class="text-white font-normal">Negar eso sería poco realista.</strong>
+                    </p>
+                    
+                    <div class="my-8 relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-svBlue-500/10 via-transparent to-transparent blur-lg"></div>
+                        <blockquote class="relative border-l-2 border-svBlue-500 pl-6 py-2 text-xl font-serif italic text-slate-200">
+                            "Pero también es válido preguntarse si todas las decisiones que se toman en nombre del desarrollo son realmente las más correctas a largo plazo."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: POLÍTICA -->
+            <div id="sec-politica" class="content-section space-y-8">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 text-red-400">
+                        <i class="fa-solid fa-bullhorn text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Interés Político e Hipocresía</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                        <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-flag text-red-400"></i> La Bandera Política
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            En el caso de El Espino y el proyecto del nuevo O,CIFC parte de la oposición ha utilizado el tema como bandera política. Figuras como Manuel Flores suelen aprovechar estas situaciones para atacar al oficialismo. Sin embargo, <strong class="text-white font-medium">que exista interés político no significa automáticamente que toda preocupación ambiental sea falsa</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                        <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-masks-theater text-svGold-400"></i> Hipocresía Social
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Muchas personas que hoy hablan intensamente sobre medio ambiente quizá nunca han sembrado un árbol o mantenido un compromiso constante. Defender la naturaleza no debería convertirse solo en <strong class="text-white font-medium">tendencia de redes sociales</strong> cuando aparece un conflicto político.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: ECOSISTEMA -->
+            <div id="sec-ecosistema" class="content-section space-y-8">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-full bg-svGreen-500/20 flex items-center justify-center border border-svGreen-500/30 text-svGreen-400">
+                        <i class="fa-solid fa-tree text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">El Valor Ecológico Real</h2>
+                </div>
+
+                <div class="space-y-6 text-slate-300 font-light leading-relaxed">
+                    <p>
+                        No se puede ignorar que El Espino tiene valor ecológico real. Destruir parte de un bosque para construir infraestructura es una decisión de corto plazo: <span class="text-white">los edificios pueden moverse, un ecosistema maduro tarda décadas en recuperarse.</span> Cuando se pierden áreas verdes, se pierde capacidad de regular temperatura y absorber agua.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-svGreen-900/40 to-slate-900/40 p-6 rounded-2xl border border-svGreen-500/20 mt-6">
+                        <h3 class="font-bold text-white mb-2">El Verdadero Reto</h3>
+                        <p class="text-sm">
+                            Afirmar que la intervención destruirá por completo la calidad de vida de San Salvador sería exagerado. El problema viene de fenómenos como El Niño desde los 80s. El reto para El Salvador no es escoger entre desarrollo o naturaleza, sino encontrar un <strong class="text-svGreen-300 font-medium">equilibrio inteligente</strong>. Un país moderno también se mide por su capacidad de proteger el agua y árboles para las próximas generaciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: PETICIÓN -->
+            <div id="sec-peticion" class="content-section space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-4">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-svGold-500/10 text-svGold-400 mb-2 border border-svGold-500/20 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+                        <i class="fa-solid fa-file-signature text-3xl"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">Acción Ciudadana</h2>
+                    <p class="text-slate-400 font-light text-lg">
+                        Firma a continuación para cancelar o solicitar mover la construcción a otro lugar.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center justify-center pt-8">
+                    <!-- Botón PRO con efecto Glow -->
+                    <a href="https://www.change.org/p/salvemos-el-espino-protejamos-el-pulm%C3%B3n-de-san-salvador?recruiter=1415877406&recruited_by_id=c08f1660-5555-11f1-b8ea-0156219ddb97&utm_source=share_petition&utm_campaign=psf_promote_or_share&utm_term=psf_promote_or_share&utm_medium=copylink&share_id=Tkh2mMDDn5&fbclid=IwVERDUAR-p5NleHRuA2FlbQIxMABzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR6vWPjlmCqkAgUOhNyyMzfo11OjR_cHeDobXjzLrVw6bzO47p6lHvk-71qoJw_aem_8dhaUv-N_xTcbpcTnMGNuw" 
+                       target="_blank"
+                       class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-svGold-400 to-orange-500 rounded-xl blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative px-8 py-4 bg-slate-900 rounded-xl leading-none flex items-center border border-slate-800">
+                            <span class="flex items-center gap-3 text-white font-bold tracking-wide">
+                                <i class="fa-solid fa-signature text-svGold-400"></i>
+                                FIRMAR EN CHANGE.ORG
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <p class="mt-6 text-xs text-slate-500 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved"></i> Enlace directo y seguro a la plataforma oficial.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CONTROLES DE NAVEGACIÓN INFERIOR -->
+            <div class="mt-12 pt-6 border-t border-white/5 flex justify-between items-center text-sm font-medium">
+                <button id="btn-prev" onclick="navStep(-1)" class="text-slate-400 hover:text-white transition-colors invisible">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Anterior
+                </button>
+                <div class="flex gap-2">
+                    <span class="w-2 h-2 rounded-full bg-svBlue-500 shadow-[0_0_8px_#3b82f6] indicator" id="ind-0"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/20 indicator" id="ind-1"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/20 indicator" id="ind-2"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/20 indicator" id="ind-3"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/20 indicator" id="ind-4"></span>
+                </div>
+                <button id="btn-next" onclick="navStep(1)" class="text-white hover:text-svBlue-400 transition-colors">
+                    Siguiente <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JS LOGIC -->
+    <script>
+        const sections = ['inicio', 'desarrollo', 'politica', 'ecosistema', 'peticion'];
+        let currentIndex = 0;
+
+        function switchSection(targetId) {
+            const index = sections.indexOf(targetId);
+            if(index !== -1) currentIndex = index;
+            updateUI();
+        }
+
+        function navStep(step) {
+            currentIndex += step;
+            if(currentIndex < 0) currentIndex = 0;
+            if(currentIndex >= sections.length) currentIndex = sections.length - 1;
+            updateUI();
+        }
+
+        function updateUI() {
+            // Actualizar contenido
+            sections.forEach((sec, idx) => {
+                const sectionEl = document.getElementById(`sec-${sec}`);
+                if (idx === currentIndex) {
+                    sectionEl.classList.add('active');
+                } else {
+                    sectionEl.classList.remove('active');
+                }
+                
+                // Actualizar botones menú escritorio y móvil
+                ['btn-', 'btn-', '-mob'].forEach(prefix => {
+                    const id = prefix === '-mob' ? `btn-${sec}-mob` : `btn-${sec}`;
+                    const btn = document.getElementById(id);
+                    if(btn) {
+                        if (idx === currentIndex) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Actualizar indicadores (puntos inferiores)
+                const ind = document.getElementById(`ind-${idx}`);
+                if(ind) {
+                    if (idx === currentIndex) {
+                        ind.className = 'w-2 h-2 rounded-full bg-svBlue-500 shadow-[0_0_8px_#3b82f6] indicator';
+                    } else {
+                        ind.className = 'w-2 h-2 rounded-full bg-white/20 indicator';
+                    }
+                }
+            });
+
+            // Control de visibilidad de botones Anterior/Siguiente
+            document.getElementById('btn-prev').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+            
+            const btnNext = document.getElementById('btn-next');
+            if (currentIndex === sections.length - 1) {
+                btnNext.style.visibility = 'hidden';
+            } else {
+                btnNext.style.visibility = 'visible';
+            }
+        }
+    </script>
+</body>
+</html>
