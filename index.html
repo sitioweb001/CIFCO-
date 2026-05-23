@@ -161,14 +161,15 @@
     <!-- NAVEGACIÓN SUPERIOR (GLASSMORPHISM) -->
     <nav class="glass-nav fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-20 sm:h-24">
                 <!-- LOGO SVG TRANSPARENTE -->
-                <div class="flex-shrink-0 flex items-center gap-3">
+                <div class="flex-shrink-0 flex items-center gap-3 md:gap-5">
                     <!-- Aquí se carga tu logo.svg. El fondo es bg-transparent. 
-                         El onerror es un respaldo seguro por si la imagen local no existe aún. -->
-                    <img src="logo.svg" alt="Logo" class="h-12 w-auto object-contain bg-transparent drop-shadow-xl" 
-                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'none\' stroke=\'%233b82f6\' stroke-width=\'4\'><circle cx=\'50\' cy=\'50\' r=\'40\'/><path d=\'M25 75L50 25L75 75\' stroke=\'%23fbbf24\'/><circle cx=\'50\' cy=\'50\' r=\'5\' fill=\'%23fff\'/></svg>'">
-                    <span class="font-serif text-xl font-bold tracking-wider text-white hidden sm:block bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+                         Se agregó brightness-0 e invert para forzar el SVG a color blanco puro 
+                         y h-16 sm:h-20 para aumentar su tamaño considerablemente. -->
+                    <img src="logo.svg" alt="Logo" class="h-16 sm:h-20 w-auto object-contain bg-transparent drop-shadow-xl brightness-0 invert" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'4\'><circle cx=\'50\' cy=\'50\' r=\'40\'/><path d=\'M25 75L50 25L75 75\' stroke=\'%23ffffff\'/><circle cx=\'50\' cy=\'50\' r=\'5\' fill=\'%23fff\'/></svg>'">
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white hidden sm:block bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
                         DEBATE SV
                     </span>
                 </div>
